@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+	<head>
+		<title>
+			{% block title %}JeBenevole{% endblock %}
+		</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+		<!-- Axentix -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"/>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/axentix@1.0.0/dist/css/axentix.min.css"> 
+		
+		<!-- Global CSS -->
+		<link rel="stylesheet" href="{{ asset('/styles/global.css')}}">
+		
+		{% block stylesheets %}{% endblock %}
+	</head>
+
+		<body class="layout with-sidenav">
+			<header>
+				{% include "navbar.html.twig" %}
+			</header>
+
+			{% if is_granted("ROLE_ADMIN") %}
+				{% include "sidenav.html.twig" %}
+			{% endif %}
+
+			<main>
+				{% block body %}{% endblock %}
+				<!-- Code here the main content -->
+			</main>
+
+			{% include "footer.html.twig" %}
+
+			<script src="https://cdn.jsdelivr.net/npm/axentix@1.0.0/dist/js/axentix.min.js"></script>
+
+			{% block javascripts %}{% endblock %}
+		</body>
 </html>
